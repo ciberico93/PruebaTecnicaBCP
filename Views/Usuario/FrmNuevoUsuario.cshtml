@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "FrmNuevoUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+}
+
+<!-- FORMULARIO PARA AGREGAR NUEVO USUARIO -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Agregar Nuevo Usuario</h6>
+    </div>
+    <div class="card-body">
+        <form id="formNuevoUsuario" asp-action="NuevoUsuario" asp-controller="Usuario" method="post">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="CodigoTrabajador">Código Trabajador</label>
+                    <input type="text" class="form-control" name="CodigoTrabajador" id="CodigoTrabajador" placeholder="Código del Trabajador" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Nombre del Usuario" required>
+                </div>
+
+            </div>
+            <div class="form-row">
+                
+                <div class="form-group col-md-6">
+                    <label for="Email">Email</label>
+                    <input type="email" class="form-control" name="Email" id="Email" placeholder="Email del Usuario" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" class="form-control" name="contrasena" id="contrasena" placeholder="Contraseña del usuario" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="TelefonoCelular">Teléfono/Celular</label>
+                    <input type="tel" class="form-control" name="TelefonoCelular" id="TelefonoCelular" placeholder="Teléfono o Celular" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Puesto">Puesto</label>
+                    <input type="text" class="form-control" name="Puesto" id="Puesto" placeholder="Puesto del Usuario" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Rol">Rol</label>
+                    <select class="form-control" name="IdRol" id="IdRol" required>
+                        @foreach (var rol in ViewBag.ListaRoles)
+                        {
+                            <option value="@rol.IdRol">@rol.Nombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="AgregarUsuario()">Guardar Usuario</button>
+                <a href="@Url.Action("FrmUsuario", "Usuario")" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+
+    <script src="~/js/Usuario/FrmNuevoUsuario.js"></script>
+}

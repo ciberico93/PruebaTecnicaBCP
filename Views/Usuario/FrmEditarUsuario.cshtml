@@ -1,0 +1,101 @@
+﻿@model Usuario
+@{
+    ViewData["Title"] = "FrmEditarUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+
+}
+
+<!-- FORMULARIO PARA AGREGAR NUEVO USUARIO -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Actualizar Usuario</h6>
+    </div>
+    <div class="card-body">
+        <form id="FrmEditarUsuario" method="post" asp-action="ActualizarUsuario" asp-controller="Usuario">
+            <input type="hidden" name="IdUsuario" value="@Model.IdUsuario" /> <!-- Campo oculto para enviar el IdUsuario  -->
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Nombre">Nombre</label>
+                    <input type="text" class="form-control" name="Nombre" id="Nombre" value="@Model.Nombre" placeholder="Nombre del Usuario" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="CodigoTrabajador">Código Trabajador</label>
+                    <input type="text" class="form-control" id="CodigoTrabajador" name="CodigoTrabajador" value="@Model.CodigoTrabajador" placeholder="Código del Trabajador" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="contrasena">Contraseña</label>
+                    <input type="checkbox" class="" id="habilitarContrasena">
+                    <input type="password" class="form-control" name="Contrasena" id="contrasena" placeholder="Dejar en blanco si no desea cambiar" disabled>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Email">Email</label>
+                    <input type="email" class="form-control" name="Email" id="Email" value="@Model.Email" placeholder="Email del Usuario" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="TelefonoCelular">Teléfono/Celular</label>
+                    <input type="tel" class="form-control" name="TelefonoCelular" id="TelefonoCelular" value="@Model.TelefonoCelular" placeholder="Teléfono o Celular" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Puesto">Puesto</label>
+                    <input type="text" class="form-control" name="Puesto" id="Puesto" value="@Model.Puesto" placeholder="Puesto del Usuario" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Rol">Rol</label>
+                    <select class="form-control" name="IdRol" id="IdRol" asp-for="@Model.IdRol" required>
+                        @foreach (var rol in ViewBag.ListaRoles)
+                        {
+                            <option value="@rol.IdRol">@rol.Nombre</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="ActualizarUsuario()">
+                    <span class="indicator-label">Actualizar</span>
+                    <span class="indicator-progress d-none">
+                        Por favor espere...
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                </button>
+                <a href="@Url.Action("FrmUsuario", "Usuario")" class="btn btn-danger">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+    <script src="~/js/Usuario/FrmEditarUsuario.js"></script>
+
+}
+

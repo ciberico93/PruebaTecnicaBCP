@@ -1,0 +1,106 @@
+﻿@model List<Pedido>
+@{
+    ViewData["Title"] = "FrmPedido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Lista de Pedidos</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <a class="btn btn-success" id="btnNuevo" href="@Url.Action("FrmNuevoPedido","Pedido")"><i class="fas fa-plus-circle"></i> Nueva Pedido</a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-check">
+                    <!-- Campo de búsqueda -->
+                    <div class="col-md-4">
+                        <input class="form-check-input" type="checkbox" id="filtroDescripcionCheck">
+                        <label class="form-check-label" for="filtroDescripcionCheck">
+                            Filtrar solo por Pedido
+                        </label>
+                    </div>
+                </div>
+                <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>IdPedido</th>
+                            <th>NroPedido</th>
+                            <th>FechaPedido</th>
+                            <th>FechaDespacho</th>
+                            <th>FechaEntrega</th>
+                            <th>Vendedor</th>
+                            <th>Delivery</th>
+                            <th>EstadoPedido</th>
+                            <th>Total</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var pedido in Model){
+                            <tr>
+                                <td>@pedido.IdPedido</td>
+                                <td>@pedido.NroPedido</td>
+                                <td>@pedido.FechaPedido</td>
+                                <td>@pedido.FechaDespacho</td>
+                                <td>@pedido.FechaEntrega</td>
+                                <td>@pedido.IdVendedorNavigation?.Nombre</td>
+                                <td>@pedido.IdDeliveryNavigation?.Nombre</td>
+                                <td>@pedido.IdEstadoPedidoNavigation?.Nombre</td>
+                                <td>@pedido.Total</td>
+                                <td>
+                                    <div>
+                                        <a asp-controller="Pedido" asp-action="FrmDetallePedido" asp-route-id="@pedido.IdPedido" class="btn btn-sm btn-primary btn-active-light-primary me-2">
+                                            Ver Detalle
+                                        </a>
+
+                                        <a asp-controller="Pedido" asp-action="FrmEditarPedido" asp-route-id="@pedido.IdPedido" class="btn btn-sm btn-danger btn-active-light-primary me-2">
+                                            Editar Estado
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+    <script src="~/js/Pedido/FrmPedido.js"></script>
+
+}
+

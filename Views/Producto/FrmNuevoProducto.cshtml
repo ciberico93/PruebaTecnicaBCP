@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "FrmNuevoProducto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+
+}
+
+
+@* !-- FORMULARIO PARA AGREGAR NUEVO PRODUCTO --> *@
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Agregar Nuevo Producto</h6>
+    </div>
+    <div class="card-body">
+        <form id="formNuevoProducto" asp-action="NuevoProducto" asp-controller="Producto" method="post">
+           
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Sku">SKU</label>
+                    <input type="text" class="form-control"  name="Sku" id="Sku" placeholder="SKU del Producto" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Descripcion">Descripción Nombre de Producto</label>
+                    <input type="text" class="form-control" name="Nombre" id="Descripcion" placeholder="Descripción Nombre del Producto" required>
+                </div>
+            </div>
+           
+            <div class="form-row">
+              
+                <div class="form-group col-md-6">
+                    <label for="IdTipo">Tipo de Producto</label>
+                    <select class="form-control" name="IdTipo" id="IdTipo" required>
+                        <option value="">Seleccione un tipo</option>
+                        <option value="1">Electrónico</option>
+                        <option value="2">Ropa</option>
+                        <option value="3">Alimentos</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="Etiqueta">Etiqueta</label>
+                    <input type="text" class="form-control"  name="Etiqueta" id="Etiqueta" placeholder="Etiqueta" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+               
+                <div class="form-group col-md-6">
+                    <label for="Precio">Precio</label> 
+                    <input type="number" step="0.01" class="form-control"  name="Precio" id="Precio" placeholder="Precio" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Stock">Stock</label>
+                    <input type="number" class="form-control"  name="Stock" id="Stock" placeholder="Stock disponible" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn btn-primary" onclick="AgregarProducto()">Guardar Producto</button>
+                <a href="@Url.Action("FrmProducto", "Producto")" class="btn btn-danger">Cancelar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+    <script src="~/js/Producto/FrmNuevoProducto.js"></script>
+
+
+}

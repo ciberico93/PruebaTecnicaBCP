@@ -1,0 +1,117 @@
+﻿@model List<Producto>
+@{
+    ViewData["Title"] = "FrmProducto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Estilos {
+    <!-- ============================================================
+    =ESTILOS PARA ESTA PAGINA
+    ===============================================================-->
+    <link rel="stylesheet" href="~/vendor/datatables/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="~/vendor/datatables/extensiones/css/buttons.dataTables.min.css">
+
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3 bg-second-primary">
+        <h6 class="m-0 font-weight-bold text-white">Lista de Productos</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-3">
+                <a class="btn btn-success" href="@Url.Action("FrmNuevoProducto","Producto")"><i class="fas fa-plus-circle"></i> Nuevo Producto</a>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-check">
+                    <!-- Campo de búsqueda -->
+                    <div class="col-md-4">
+                        <input class="form-check-input" type="checkbox" id="filtroDescripcionCheck">
+                        <label class="form-check-label" for="filtroDescripcionCheck">
+                            Filtrar solo por Descripción
+                        </label>
+                    </div>
+                </div>
+                
+                <table class="table table-bordered" id="tbdata" cellspacing="0" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>IdProducto</th>
+                            <th>Sku</th>
+                            <th>Descripcion</th>
+                            <th>Tipo</th>
+                            <th>Etiqueta</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var producto in Model)
+                        {
+                            <tr>
+
+                                <td>@producto.IdProducto</td>
+                                <td>@producto.Sku</td>
+                                <td>@producto.Nombre</td>
+                                <td>
+                                    @switch (producto.IdTipo)
+                                    {
+                                        case 1:
+                                            @:Electrónico
+                                            break;
+                                        case 2:
+                                            @:Ropa
+                                            break;
+                                        case 3:
+                                            @:Alimentos
+                                            break;
+                                        default:
+                                            @:Otro
+                                            break;
+                                    }
+                                </td>
+                                <td>@producto.Etiqueta</td>
+                                <td>@producto.Precio</td>
+                                <td>@producto.Stock</td>
+                                <td>
+                                    <div>
+                                        <a asp-controller="Producto" asp-action="FrmEditarProducto" asp-route-id="@producto.IdProducto" class="btn btn-sm btn-light btn-active-light-primary me-2">
+                                            Editar
+                                        </a>
+                                        <a class="btn btn-sm btn-danger" onclick="EliminarProducto(@producto.IdProducto)">Eliminar</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <!-- ============================================================
+    =SCRIPTS PARA ESTA PAGINA
+    ===============================================================-->
+    <script src="~/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.responsive.min.js"></script>
+
+    <script src="~/vendor/datatables/extensiones/js/dataTables.buttons.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/jszip.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.html5.min.js"></script>
+    <script src="~/vendor/datatables/extensiones/js/buttons.print.min.js"></script>
+    <script src="~/js/Producto/FrmProducto.js"></script>
+
+}
+
